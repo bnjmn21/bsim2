@@ -1,13 +1,10 @@
 [package]
-name = "bevy_game" # ToDo
+name = "bsim2"
 version = "0.1.0"
 publish = false
-authors = ["Niklas Eicker <git@nikl.me>"] # ToDo: you are the author ;)
+authors = ["Benjamin Martin <benma2321@gmail.com>"]
 edition = "2021"
 exclude = ["dist", "build", "assets", "credits"]
-
-[workspace]
-members = ["mobile"]
 
 [profile.dev.package."*"]
 opt-level = 3
@@ -32,6 +29,7 @@ codegen-units = 1
 strip = true
 
 [features]
+default = ["dev"]
 dev = [
     "bevy/dynamic_linking",
 ]
@@ -61,15 +59,19 @@ bevy = { version = "0.13", default-features = false, features = [
     "default_font",
     "webgl2",
     "bevy_debug_stepping",
+    "file_watcher",
 ] }
 bevy_kira_audio = { version = "0.19" }
 bevy_asset_loader = { version = "0.20" }
+bevy_pancam = "0.11.1"
 rand = { version = "0.8.3" }
-webbrowser = { version = "0.8", features = ["hardened"] }
 
 # keep the following in sync with Bevy's dependencies
 winit = { version = "0.29", default-features = false }
 image = { version = "0.24", default-features = false }
+
+[target.'cfg(target_family = "wasm")'.dependencies]
+web-sys = { version = "0.3.69", features = ["HtmlCanvasElement"]}
 
 [build-dependencies]
 embed-resource = "1"

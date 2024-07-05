@@ -1,9 +1,10 @@
 body, html {
     height: 100%;
+    overflow: hidden;
 }
 
 body {
-    background-color: lightgray;
+    background-color: #000;
     margin: 0;
     display: flex;
     justify-content: center;
@@ -11,8 +12,8 @@ body {
 }
 
 .game-container {
-    width: 800px;
-    height: 600px;
+    height: 100%;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
