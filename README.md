@@ -19,3 +19,12 @@ cargo build --release --no-default-features
 
 The `--no-default-features` is used to disable Bevys `dynamic-linking` feature,
 which is not recommended for release builds as it requires shipping a `bevy-dylib` dll.
+
+## Structure
+
+- `./assets` contains images and gltf scene files (`.glb`) used within the program.
+- `./build` contains extra files for compiling the project to the different targets.
+- `./dist` is the target folder for the web build.
+- `./gates.blend` is a blender file containing the meshes for the logic gates.
+
+The rest of the files should be familiar to [rustaceans](https://www.rustacean.net/).
