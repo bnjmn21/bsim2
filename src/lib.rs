@@ -3,7 +3,7 @@ mod loading;
 
 #[cfg(target_family = "wasm")]
 mod web;
-use bevy::asset::AssetMetaCheck;
+
 use bevy::render::camera::ScalingMode;
 use bevy_pancam::{PanCam, PanCamPlugin};
 use blocks::BlockPlugin;
@@ -28,25 +28,23 @@ impl Plugin for GamePlugin {
     fn build(&self, app: &mut App) {
         #[cfg(target_family = "wasm")]
         app.add_plugins(WebPlugin);
-
-        app.init_state::<GameState>()
-            .insert_resource(AssetMetaCheck::Never)
-            .add_plugins((
-                DefaultPlugins.set(WindowPlugin {
-                    primary_window: Some(Window {
-                        title: "BSim2".to_string(),
-                        canvas: Some("#bevy".to_owned()),
-                        prevent_default_event_handling: false,
-                        ..default()
-                    }),
+        app.add_plugins((
+            DefaultPlugins.set(WindowPlugin {
+                primary_window: Some(Window {
+                    title: "BSim2".to_string(),
+                    canvas: Some("#bevy".to_owned()),
+                    prevent_default_event_handling: false,
                     ..default()
                 }),
-                PanCamPlugin,
-                LoadingPlugin,
-                BlockPlugin,
-            ))
-            .insert_resource(ClearColor(Color::rgb(0.2, 0.2, 0.2)))
-            .add_systems(Startup, setup);
+                ..default()
+            }),
+            PanCamPlugin,
+            LoadingPlugin,
+            BlockPlugin,
+        ))
+        .init_state::<GameState>()
+        .insert_resource(ClearColor(Color::srgb(0.2, 0.2, 0.2)))
+        .add_systems(Startup, setup);
     }
 }
 

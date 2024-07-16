@@ -5,20 +5,41 @@ This is based on [BSim](https://github.com/bnjmn21/bsim).
 
 ## Building
 
-For compiling and running a dev build, use the standard `cargo` cli:
+For compiling and running a dev build, use the standard `cargo` cli, with the `dev` feature enabled:
 
-```shell
+```bash
 cargo run
 ```
 
+
 For compiling a release build, use:
 
-```shell
+```bash
 cargo build --release --no-default-features
 ```
 
-The `--no-default-features` is used to disable Bevys `dynamic-linking` feature,
-which is not recommended for release builds as it requires shipping a `bevy-dylib` dll.
+By default the `dev` feature is enabled, which is used to enable Bevys `dynamic-linking` and `file-watcher` feature.
+For releases the `dynamic-linking` is not recommended as it require shipping an additional library,
+and the `file-watcher` feature is useless on release builds, and infact won't even compile for WASM-builds.
+
+For building the web version, use:
+
+```bash
+trunk build --release --no-default-features
+```
+
+or
+
+```bash
+trunk build --release --no-default-features
+```
+
+to build it and start a webserver running it.
+Make sure you have trunk installed, which is available through
+
+```bash
+cargo install --locked trunk
+```
 
 ## Structure
 
@@ -27,4 +48,4 @@ which is not recommended for release builds as it requires shipping a `bevy-dyli
 - `./dist` is the target folder for the web build.
 - `./gates.blend` is a blender file containing the meshes for the logic gates.
 
-The rest of the files should be familiar to [rustaceans](https://www.rustacean.net/).
+The rest of the files are like the usual cargo project structure.

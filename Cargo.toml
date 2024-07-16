@@ -30,48 +30,42 @@ strip = true
 
 [features]
 default = ["dev"]
-dev = [
-    "bevy/dynamic_linking",
-]
+dev = ["bevy/dynamic_linking", "bevy/file_watcher"]
 
 # All of Bevy's default features exept for the audio related ones (bevy_audio, vorbis), since they clash with bevy_kira_audio
 #   and android_shared_stdcxx, since that is covered in `mobile`
 [dependencies]
-bevy = { version = "0.13", default-features = false, features = [
-    "animation",
+bevy = { version = "0.14", default-features = false, features = [
     "bevy_asset",
     "bevy_gilrs",
     "bevy_scene",
     "bevy_winit",
     "bevy_core_pipeline",
-    "bevy_pbr",
     "bevy_gltf",
     "bevy_render",
     "bevy_sprite",
     "bevy_text",
     "bevy_ui",
-    "multi-threaded",
+    "multi_threaded",
     "png",
     "hdr",
     "x11",
-    "bevy_gizmos",
+    "wayland",
     "tonemapping_luts",
     "default_font",
     "webgl2",
     "bevy_debug_stepping",
-    "file_watcher",
 ] }
-bevy_kira_audio = { version = "0.19" }
-bevy_asset_loader = { version = "0.20" }
-bevy_pancam = "0.11.1"
+bevy_kira_audio = "0.20"
+bevy_asset_loader = "0.21"
+bevy_pancam = "0.12.0"
 rand = { version = "0.8.3" }
 
-# keep the following in sync with Bevy's dependencies
-winit = { version = "0.29", default-features = false }
-image = { version = "0.24", default-features = false }
+# winit = { version = "*", default-features = false, features = [] }
+image = { version = "*", default-features = false }
 
 [target.'cfg(target_family = "wasm")'.dependencies]
-web-sys = { version = "0.3.69", features = ["HtmlCanvasElement"]}
+web-sys = { version = "0.3.69", features = ["HtmlCanvasElement"] }
 
 [build-dependencies]
 embed-resource = "1"
